@@ -20,7 +20,7 @@
     "ordered-imports": false,
     "quotemark": [
       // 引号使用规则
-      true,
+      false,
       "single"
     ],
     "no-console": false,
