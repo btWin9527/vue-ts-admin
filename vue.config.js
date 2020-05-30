@@ -25,7 +25,7 @@ module.exports = {
   },
   lintOnSave: false,
 
-  chainWebpack(config) {
+ /* chainWebpack(config) {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
     config.set('name', name)
@@ -65,7 +65,7 @@ module.exports = {
     config.resolve.alias
       .set('@', path.resolve('src'))
       .set('@assets', path.resolve('src/assets'))
-  },
+  },*/
   pluginOptions: {
     // 统一配置scss变量
     'style-resources-loader': {

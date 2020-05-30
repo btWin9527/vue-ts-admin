@@ -42,6 +42,7 @@
 <script lang="ts">
   import {Component, Vue} from 'vue-property-decorator';
   import {Form as ElForm, Input} from 'element-ui';
+  import {login} from "@/api/user";
 
   /* 接口类型定义 -- 必须定义到装饰器前面 */
   interface LoginForm {
@@ -97,9 +98,9 @@
     };
 
     /* 生命周期函数 */
-    private created() {
-
-    }
+    // private async created() {
+      // let res = await login({});
+    // }
 
     private mounted() {
 
