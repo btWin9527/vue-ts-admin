@@ -6,9 +6,14 @@ Vue.use(VueRouter);
 const routes: RouteConfig[] = [
   {
     path: '/',
-    name: 'Home',
-    component: () => import(/* webpackChunkName: "about" */ '../App.vue'),
+    name: 'dashboard',
+    component: () => import(/* webpackChunkName: "dashboard" */ '../views/dashboard/index.vue'),
 
+  },
+  // 登录
+  {
+    path: '/login',
+    component: () => import(/* webpackChunkName: "login" */ '../views/login/index.vue'),
   },
 ];
 

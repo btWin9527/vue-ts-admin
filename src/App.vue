@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <p>hello world!!!</p>
-    <img alt="Vue logo" src="@/assets/logo.png"/>
+    <router-view/>
   </div>
 </template>
 
@@ -12,8 +11,6 @@
     name: 'app'
   })
   export default class extends Vue {
-    private created() {
-      console.log(12345)
-    }
+
   }
 </script>

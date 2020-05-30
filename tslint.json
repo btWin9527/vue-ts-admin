@@ -1,5 +1,6 @@
 {
-  "defaultSeverity": "warning",
+  // 值为warn时为警告
+  "defaultSeverity": "none",
   "extends": [
     "tslint:recommended"
   ],
@@ -41,6 +42,10 @@
           "typeLiterals": "ignore"
         }
       }
+    ],
+    // 不检测隐式类型
+    "arrow-parens": [
+      false
     ]
   }
 }
