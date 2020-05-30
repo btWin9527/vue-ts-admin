@@ -1,21 +1,102 @@
 <template>
-  <div>
-    登录页
+  <div class="login-container">
+    <section>
+      <!--
+       loginForm:
+       status-icon  是否在输入框中显示校验结果反馈图标
+       model        表单数据对象
+       rules        表单校验规则
+       -->
+      <el-form
+        status-icon
+        ref="loginForm"
+        :model="loginForm"
+        :rules="loginRules"
+        class="login-form">
+        <!-- mobilePhone -->
+        <el-form-item prop="mobilePhone">
+          <el-input
+            type="text"
+            autocomplete="off"
+            placeholder="请输入手机号"
+            v-model="loginForm.mobilePhone"
+          ></el-input>
+        </el-form-item>
+        <!-- password -->
+        <el-form-item prop="password">
+          <el-input
+            type="password"
+            autocomplete="off"
+            placeholder="请输入密码"
+            v-model="loginForm.password"
+          />
+        </el-form-item>
+        <footer>
+          <el-button type="primary" @click.native.prevent="handleLogin">登录</el-button>
+        </footer>
+      </el-form>
+    </section>
   </div>
 </template>
 
 <script lang="ts">
-  import {Component, Vue} from "vue-property-decorator";
-  // 类组件@Component
+  import {Component, Vue} from 'vue-property-decorator';
+  import {Form as ElForm, Input} from 'element-ui';
+
+  /* 接口类型定义 -- 必须定义到装饰器前面 */
+  interface LoginForm {
+    mobilePhone: string,
+    password: string,
+  }
+
   @Component({
     name: 'login'
   })
+
   export default class extends Vue {
-    private loading: boolean = false; // data变量
-    private get pageSize() { // 计算属性
-      return 10;
+    /**
+     * @method validateMobilePhone      手机号校验
+     * @param {any} rule                校验规则
+     * @param {string} value            待校验文本
+     * @param {Function} callback       回调
+     */
+    private validateMobilePhone = (rule: any, value: string, callback: Function) => {
+      if (!value.trim()) {
+        callback(new Error('Please enter the correct mobilePhone'))
+      } else {
+        callback()
+      }
+    }
+    /**
+     * @method validateMobilePhone      密码校验
+     * @param {any} rule                校验规则
+     * @param {string} value            待校验文本
+     * @param {Function} callback       回调
+     */
+    private validatePassword = (rule: any, value: string, callback: Function) => {
+      if (value.length < 6) {
+        callback(new Error('The password can not be less than 6 digits'))
+      } else {
+        callback()
+      }
     }
 
+    /* 登录校验规则 */
+    private loginRules = {
+      mobilePhone: [{validator: this.validateMobilePhone, trigger: 'blur'}],
+      password: [{validator: this.validatePassword, trigger: 'blur'}]
+    }
+
+    /* 登录相关变量 */
+    // 登录
+    private loading: boolean = false;
+
+    private loginForm = {
+      mobilePhone: '17091647779',
+      password: 'a123456'
+    };
+
+    /* 生命周期函数 */
     private created() {
 
     }
@@ -24,16 +105,83 @@
 
     }
 
-    private handleLogin() { // methods方法
+    public destroyed() {
 
     }
 
-    public destroyed() { // 销毁声明周期
+    /* methods方法 */
 
+    // 登录处理
+    private handleLogin() {
+      (this.$refs.loginForm as ElForm).validate(async (valid: boolean) => {
+        console.log(typeof this.$router, 'router')
+        if (valid) {
+          console.log('校验通过')
+        } else {
+          console.log('校验未通过')
+          return false;
+        }
+      })
     }
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  .login-container {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: $loginBg;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
 
+    > section {
+      position: absolute;
+      background-color: rgba(250, 250, 250, 0.8);
+      border-radius: 5px;
+
+      > div {
+        width: 300px;
+        position: relative;
+        height: 80px;
+        text-align: center;
+
+        > span {
+          line-height: 80px;
+          font-size: 30px;
+          color: #000;
+          display: inline-block;
+          text-align: center;
+        }
+
+        .international {
+          position: absolute;
+          top: 33px;
+          right: 20px;
+          cursor: pointer;
+        }
+      }
+
+      .login-form {
+        padding: 30px 20px 20px 20px;
+        position: relative;
+        width: 300px;
+        max-width: 300px;
+        margin: 0 auto;
+        overflow: hidden;
+
+        > footer {
+          text-align: center;
+          width: 100%;
+
+          > button {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
 </style>

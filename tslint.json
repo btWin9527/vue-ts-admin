@@ -1,5 +1,4 @@
 {
-  // 值为warn时为警告
   "defaultSeverity": "none",
   "extends": [
     "tslint:recommended"
@@ -20,18 +19,15 @@
     "object-literal-sort-keys": false,
     "ordered-imports": false,
     "quotemark": [
-      // 引号使用规则
-      false,
+      true,
       "single"
     ],
-    "no-console": false,
     "semicolon": [
-      // 分号使用规则
       false,
       "always"
     ],
+    "no-console": false,
     "trailing-comma": [
-      // 对尾随逗号的校验
       true,
       {
         "singleline": "never",
@@ -43,9 +39,53 @@
         }
       }
     ],
-    // 不检测隐式类型
     "arrow-parens": [
-      false
+      false,
+      "as-needed"
+    ],
+    "ban-type": [
+      true,
+      [
+        "object",
+        "User {} instead."
+      ],
+      [
+        "string"
+      ]
+    ],
+    "ban": [
+      true,
+      "eval",
+      {
+        "name": "$",
+        "message": "please don't"
+      },
+      [
+        "describe",
+        "only"
+      ],
+      {
+        "name": [
+          "it",
+          "only"
+        ],
+        "message": "don't focus tests"
+      },
+      {
+        "name": [
+          "chai",
+          "assert",
+          "equal"
+        ],
+        "message": "Use 'strictEqual' instead."
+      },
+      {
+        "name": [
+          "*",
+          "forEach"
+        ],
+        "message": "Use a regular for loop instead."
+      }
     ]
   }
 }
