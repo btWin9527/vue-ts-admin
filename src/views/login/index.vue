@@ -42,7 +42,7 @@
 <script lang="ts">
   import {Component, Vue} from 'vue-property-decorator';
   import {Form as ElForm, Input} from 'element-ui';
-  import {login} from "@/api/user";
+  import {UserModule} from "@/store/modules/user";
 
   /* 接口类型定义 -- 必须定义到装饰器前面 */
   interface LoginForm {
@@ -98,9 +98,8 @@
     };
 
     /* 生命周期函数 */
-    // private async created() {
-      // let res = await login({});
-    // }
+    async created() {
+    }
 
     private mounted() {
 
@@ -118,6 +117,10 @@
         console.log(typeof this.$router, 'router')
         if (valid) {
           console.log('校验通过')
+          await UserModule.Login({
+            ...this.loginForm,
+            router: this.$router
+          })
         } else {
           console.log('校验未通过')
           return false;
