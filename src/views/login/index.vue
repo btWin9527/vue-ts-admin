@@ -13,13 +13,13 @@
         :model="loginForm"
         :rules="loginRules"
         class="login-form">
-        <!-- mobilePhone -->
-        <el-form-item prop="mobilePhone">
+        <!-- username -->
+        <el-form-item prop="username">
           <el-input
             type="text"
             autocomplete="off"
-            placeholder="请输入手机号"
-            v-model="loginForm.mobilePhone"
+            placeholder="请输入用户名"
+            v-model="loginForm.username"
           ></el-input>
         </el-form-item>
         <!-- password -->
@@ -46,7 +46,7 @@
 
   /* 接口类型定义 -- 必须定义到装饰器前面 */
   interface LoginForm {
-    mobilePhone: string,
+    username: string,
     password: string,
   }
 
@@ -63,7 +63,7 @@
      */
     private validateMobilePhone = (rule: any, value: string, callback: Function) => {
       if (!value.trim()) {
-        callback(new Error('Please enter the correct mobilePhone'))
+        callback(new Error('Please enter the correct username'))
       } else {
         callback()
       }
@@ -84,7 +84,7 @@
 
     /* 登录校验规则 */
     private loginRules = {
-      mobilePhone: [{validator: this.validateMobilePhone, trigger: 'blur'}],
+      username: [{validator: this.validateMobilePhone, trigger: 'blur'}],
       password: [{validator: this.validatePassword, trigger: 'blur'}]
     }
 
@@ -93,7 +93,7 @@
     private loading: boolean = false;
 
     private loginForm = {
-      mobilePhone: '17091647779',
+      username: 'admin',
       password: 'a123456'
     };
 

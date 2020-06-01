@@ -27,11 +27,9 @@ class User extends VuexModule implements IUserState {
 
   @Action
   public async Login(params: any) {
-    console.log(1111111111)
-    let {mobilePhone, password} = params;
-    console.log(2222)
+    let {username, password} = params;
     // @ts-ignore
-    const {data} = await login({mobilePhone, password});
+    const {data} = await login({username, password});
     this.SET_TOKEN(`Bearer ${data.id_token}`);
     console.log(33333333)
   }

@@ -4,7 +4,6 @@
 import axios from 'axios';
 import {Message, MessageBox} from "element-ui";
 
-console.log(process.env.VUE_APP_BASE_API,'process.env.VUE_APP_BASE_API')
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000,
